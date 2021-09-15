@@ -8,7 +8,6 @@ from flask import Flask, request, jsonify
 from flask_cors import CORS
 # from flask_jwt import JWT, jwt_required, current_identity
 from flask_mail import Mail, Message
-import flask_cors
 
 
 class User(object):
@@ -174,9 +173,9 @@ def create_blog():
     response = {}
 
     if request.method == "POST":
-        prod_name = request.form['prod_name']
-        prod_price = request.form['prod_price']
-        amount = request.form['amount']
+        prod_name = request.json['prod_name']
+        prod_price = request.json['prod_price']
+        amount = request.json['amount']
 
         with sqlite3.connect('blog.db') as conn:
             cursor = conn.cursor()
